@@ -95,11 +95,34 @@ export const projects = [
 
 export const experience = [
   {
-    role: "Desenvolvedor Júnior",
+    role: "Desenvolvedor Júnior Full Stack",
     company: "DevClub",
     period: "Jun 2025 - Presente",
-    description: "Desenvolvimento de projetos web e jogos educativos com foco em acessibilidade e experiência do usuário."
+    description: "Desenvolvimento de projetos web e jogos educativos com foco em acessibilidade e experiência do usuário. Aprendendo React e Node.js."
+  },
+  {
+    role: "Cortador",
+    company: "Dakota Calçados",
+    period: "Experiência Anterior",
+    description: "Responsável pelo corte de materiais para produção de calçados, desenvolvendo precisão e atenção aos detalhes."
   }
+];
+
+export const education = [
+  {
+    degree: "Licenciatura em Informática",
+    institution: "Universidade Tiradentes (UNIT)",
+    year: "2019",
+    description: "Formação completa em informática com foco educacional, desenvolvendo base sólida em tecnologia."
+  }
+];
+
+export const courses = [
+  "Instalador Elétrico",
+  "Atendimento ao Cliente", 
+  "Desenvolvimento Web - DevClub",
+  "JavaScript Avançado",
+  "HTML e CSS Responsivo"
 ];
 
 export const chatbotResponses = {
