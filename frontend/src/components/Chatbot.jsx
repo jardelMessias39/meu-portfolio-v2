@@ -71,24 +71,24 @@ const Chatbot = ({ isOpen, onToggle }) => {
     setIsTyping(true);
 
     try {
-      const response = await sendMessageToAPI(currentMessage, sessionId);
+      const resposta = await enviarMensagemParaAPI(mensagemAtual, sessionId);
       
       // Atualizar session_id se necessário
-      if (response.session_id && response.session_id !== sessionId) {
-        setSessionId(response.session_id);
+      if (resposta.session_id && resposta.session_id !== sessionId) {
+        setSessionId(resposta.session_id);
       }
 
-      const botResponse = {
+      const respostaBot = {
         id: Date.now() + 1,
         type: 'bot',
-        content: response.response,
+        content: resposta.response,
         timestamp: new Date()
       };
 
-      setMessages(prev => [...prev, botResponse]);
+      setMessages(prev => [...prev, respostaBot]);
       
-    } catch (error) {
-      console.error('Error:', error);
+    } catch (erro) {
+      console.error('Erro:', erro);
       
       // Fallback response em caso de erro
       const errorResponse = {
