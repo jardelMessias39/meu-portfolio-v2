@@ -32,26 +32,26 @@ const Chatbot = ({ isOpen, onToggle }) => {
 
   const sendMessageToAPI = async (message, currentSessionId) => {
     try {
-      const response = await fetch(`${API}/chat`, {
+      const resposta = await fetch(`${API}/chat`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ 
-          message: message,
-          session_id: currentSessionId 
+          message: mensagem,
+          session_id: sessionIdAtual 
         })
       });
       
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (!resposta.ok) {
+        throw new Error(`Erro HTTP! status: ${resposta.status}`);
       }
       
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error sending message to API:', error);
-      throw error;
+      const dados = await resposta.json();
+      return dados;
+    } catch (erro) {
+      console.error('Erro ao enviar mensagem para a API:', erro);
+      throw erro;
     }
   };
 
