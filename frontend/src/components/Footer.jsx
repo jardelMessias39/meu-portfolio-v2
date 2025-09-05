@@ -6,9 +6,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Mail, href: "mailto:contato@desenvolvedor.com", label: "Email" }
+    { icon: Github, href: "https://github.com/jardelMessias39", label: "GitHub" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/jardel-messias-desenvolvedor", label: "LinkedIn" },
+    { icon: Mail, href: "mailto:jardel.messias.dev@gmail.com", label: "Email" }
   ];
 
   const quickLinks = [
