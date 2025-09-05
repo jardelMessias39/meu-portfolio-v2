@@ -1,16 +1,17 @@
 // Mock data para o portfólio
 
 export const profileData = {
-  name: "Desenvolvedor Full Stack",
-  title: "Desenvolvedor Júnior",
+  name: "Jardel Messias",
+  title: "Desenvolvedor Júnior Full Stack",
   bio: "Transformando ideias em código desde junho de 2025. Apaixonado por criar soluções que fazem a diferença na vida das pessoas.",
   company: "DevClub",
   startDate: "1 de junho de 2025",
   education: "Licenciatura em Informática - UNIT (2019)",
   location: "Brasil",
-  email: "contato@desenvolvedor.com",
-  linkedin: "linkedin.com/in/desenvolvedor",
-  github: "github.com/desenvolvedor"
+  phone: "(79) 99806-1093",
+  email: "jardel.messias.dev@gmail.com",
+  linkedin: "www.linkedin.com/in/jardel-messias-desenvolvedor",
+  github: "https://github.com/jardelMessias39"
 };
 
 export const skills = {
