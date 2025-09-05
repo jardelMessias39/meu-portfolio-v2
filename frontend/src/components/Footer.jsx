@@ -28,12 +28,12 @@ const Footer = () => {
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <Code className="h-5 w-5 text-white" />
               </div>
-              <span className="font-bold text-xl">Desenvolvedor Full Stack</span>
+              <span className="font-bold text-xl">Jardel Messias</span>
             </div>
             <p className="text-gray-400 leading-relaxed mb-6 max-w-md">
-              Apaixonado por transformar ideias em código e criar soluções que fazem 
-              a diferença na vida das pessoas. Sempre em busca de novos desafios e 
-              aprendizados.
+              Desenvolvedor Full Stack apaixonado por transformar ideias em código e criar 
+              soluções que fazem a diferença na vida das pessoas. Sempre em busca de novos 
+              desafios e aprendizados.
             </p>
             <div className="flex items-center gap-4">
               {socialLinks.map(({ icon: Icon, href, label }) => (
