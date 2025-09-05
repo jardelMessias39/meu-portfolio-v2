@@ -23,55 +23,74 @@ export const skills = {
 export const projects = [
   {
     id: 1,
-    title: "Jogo Embaralhado",
+    title: "Jogo Embaralhado (Shuffle)",
     category: "Game Development",
-    description: "Jogo de quebra-cabeça interativo onde o usuário escolhe uma imagem e define em quantas partes quer dividi-la para depois remontar.",
+    description: "Quebra-cabeça interativo onde o usuário escolhe uma imagem e define em quantas partes quer dividi-la para depois remontar. Inclui diferentes imagens temáticas do Brasil.",
     features: [
-      "Cronômetro integrado",
-      "Música de fundo relaxante", 
-      "Interface intuitiva",
-      "Diferentes níveis de dificuldade"
+      "Múltiplas opções de divisão (4x2, 3x3, etc.)",
+      "Imagens temáticas brasileiras", 
+      "Interface intuitiva de drag-and-drop",
+      "Sistema de pontuação e tempo"
     ],
-    objective: "Desenvolver concentração e percepção aos detalhes",
+    objective: "Desenvolver concentração, percepção visual e coordenação motora",
     technologies: ["HTML", "CSS", "JavaScript"],
-    image: "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=500&h=300&fit=crop",
+    image: "https://customer-assets.emergentagent.com/job_prompt-portfolio-bot/artifacts/q4dc5ygc_Captura%20de%20tela%202025-09-05%20121222.png",
     demo: "#",
-    github: "#"
+    github: "https://github.com/jardelMessias39"
   },
   {
     id: 2,
     title: "Chuva de Palavras",
     category: "Game Development", 
-    description: "Jogo de digitação onde palavras pré-selecionadas caem na tela e o usuário deve digitá-las rapidamente antes que toquem o final.",
+    description: "Jogo de digitação espacial onde palavras caem do céu como uma chuva cósmica. O jogador deve digitá-las rapidamente antes que atinjam o solo.",
     features: [
+      "Visual espacial com efeito de estrelas",
+      "Sistema de pontuação dinâmico",
       "Aumento progressivo de velocidade",
-      "Sistema de pontuação",
-      "Layout minimalista",
-      "Palavras pré-selecionadas"
+      "Interface moderna e imersiva",
+      "Contador de tempo e recordes"
     ],
-    objective: "Desenvolver agilidade, coordenação motora e velocidade de digitação",
+    objective: "Desenvolver velocidade de digitação, reflexos e coordenação motora",
     technologies: ["HTML", "CSS", "JavaScript"],
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&h=300&fit=crop",
+    image: "https://customer-assets.emergentagent.com/job_prompt-portfolio-bot/artifacts/51kl3uus_Captura%20de%20tela%202025-08-19%20034940.png",
     demo: "#",
-    github: "#"
+    github: "https://github.com/jardelMessias39"
   },
   {
     id: 3,
-    title: "Site de Turismo Acessível",
+    title: "Site Comidas Típicas do Brasil",
     category: "Web Development",
-    description: "Plataforma de turismo focada em acessibilidade, oferecendo opções de destinos para todos os públicos, incluindo pessoas com necessidades especiais.",
+    description: "Plataforma gastronômica dedicada à culinária brasileira, apresentando pratos típicos de diferentes regiões com receitas de chefs renomados.",
     features: [
-      "Descrições visuais e auditivas",
-      "Indicação de locais com rampas",
-      "Suporte para braile",
-      "Interface responsiva",
-      "Filtros de acessibilidade"
+      "Catálogo de comidas típicas regionais",
+      "Seções organizadas: bebidas, doces, receitas",
+      "Design responsivo e atrativo",
+      "Sistema de cadastro e login",
+      "Interface intuitiva para navegação"
     ],
-    objective: "Democratizar o turismo e torná-lo acessível para todos",
+    objective: "Preservar e divulgar a rica cultura gastronômica brasileira",
     technologies: ["HTML", "CSS", "JavaScript"],
-    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=500&h=300&fit=crop",
+    image: "https://customer-assets.emergentagent.com/job_prompt-portfolio-bot/artifacts/dg8hmwun_Captura%20de%20tela%202025-07-03%20010054.png",
     demo: "#",
-    github: "#"
+    github: "https://github.com/jardelMessias39"
+  },
+  {
+    id: 4,
+    title: "Gerador de Link do WhatsApp",
+    category: "Web Development",
+    description: "Ferramenta prática para gerar links diretos do WhatsApp, facilitando o contato comercial e pessoal sem precisar salvar números na agenda.",
+    features: [
+      "Geração automática de links wa.me",
+      "Campo para número com DDD",
+      "Mensagem personalizada opcional",
+      "Interface limpa e funcional",
+      "Copiar link com um clique"
+    ],
+    objective: "Simplificar a comunicação via WhatsApp para negócios e uso pessoal",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    image: "https://customer-assets.emergentagent.com/job_prompt-portfolio-bot/artifacts/pagr3vll_Captura%20de%20tela%202025-08-26%20022956.png",
+    demo: "#",
+    github: "https://github.com/jardelMessias39"
   }
 ];
 
