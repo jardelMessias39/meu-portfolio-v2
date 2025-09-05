@@ -47,30 +47,30 @@ const About = () => {
           <div className="grid sm:grid-cols-2 gap-6">
             <div className="bg-blue-50 p-6 rounded-xl border border-blue-100">
               <Calendar className="h-8 w-8 text-blue-600 mb-4" />
-              <h4 className="font-semibold text-gray-900 mb-2">Início na Programação</h4>
-              <p className="text-gray-600">{profileData.startDate}</p>
-              <p className="text-sm text-blue-600 mt-1">DevClub</p>
+              <h4 className="font-semibold text-gray-900 mb-2">Jornada</h4>
+              <p className="text-gray-600">Salvador-BA → Sergipe aos 13 anos</p>
+              <p className="text-sm text-blue-600 mt-1">Vida com a avó materna</p>
             </div>
 
             <div className="bg-purple-50 p-6 rounded-xl border border-purple-100">
               <GraduationCap className="h-8 w-8 text-purple-600 mb-4" />
               <h4 className="font-semibold text-gray-900 mb-2">Formação</h4>
               <p className="text-gray-600">Licenciatura em Informática</p>
-              <p className="text-sm text-purple-600 mt-1">UNIT - 2019</p>
+              <p className="text-sm text-purple-600 mt-1">UNIT - Há 8 anos</p>
             </div>
 
             <div className="bg-green-50 p-6 rounded-xl border border-green-100">
               <Building2 className="h-8 w-8 text-green-600 mb-4" />
-              <h4 className="font-semibold text-gray-900 mb-2">Empresa Atual</h4>
-              <p className="text-gray-600">{profileData.company}</p>
-              <p className="text-sm text-green-600 mt-1">Desenvolvedor Júnior</p>
+              <h4 className="font-semibold text-gray-900 mb-2">Experiência</h4>
+              <p className="text-gray-600">DevClub + Dakota Calçados</p>
+              <p className="text-sm text-green-600 mt-1">Cortador + Desenvolvedor</p>
             </div>
 
             <div className="bg-orange-50 p-6 rounded-xl border border-orange-100">
               <Target className="h-8 w-8 text-orange-600 mb-4" />
-              <h4 className="font-semibold text-gray-900 mb-2">Objetivo</h4>
-              <p className="text-gray-600">Fazer a diferença através do código</p>
-              <p className="text-sm text-orange-600 mt-1">Projetos que impactam vidas</p>
+              <h4 className="font-semibold text-gray-900 mb-2">Motivação</h4>
+              <p className="text-gray-600">Família e fazer a diferença</p>
+              <p className="text-sm text-orange-600 mt-1">Condições melhores através do código</p>
             </div>
           </div>
         </div>
