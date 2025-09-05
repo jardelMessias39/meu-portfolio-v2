@@ -30,7 +30,7 @@ const Chatbot = ({ isOpen, onToggle }) => {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const sendMessageToAPI = async (message, currentSessionId) => {
+  const enviarMensagemParaAPI = async (mensagem, sessionIdAtual) => {
     try {
       const resposta = await fetch(`${API}/chat`, {
         method: 'POST',
