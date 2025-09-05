@@ -58,15 +58,15 @@ const Chatbot = ({ isOpen, onToggle }) => {
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
-    const userMessage = {
+    const mensagemUsuario = {
       id: Date.now(),
       type: 'user',
       content: inputValue,
       timestamp: new Date()
     };
 
-    setMessages(prev => [...prev, userMessage]);
-    const currentMessage = inputValue;
+    setMessages(prev => [...prev, mensagemUsuario]);
+    const mensagemAtual = inputValue;
     setInputValue('');
     setIsTyping(true);
 
@@ -90,15 +90,15 @@ const Chatbot = ({ isOpen, onToggle }) => {
     } catch (erro) {
       console.error('Erro:', erro);
       
-      // Fallback response em caso de erro
-      const errorResponse = {
+      // Resposta de fallback em caso de erro
+      const respostaErro = {
         id: Date.now() + 1,
         type: 'bot',
-        content: "Desculpe, ocorreu um problema técnico. Mas posso te contar que sou um desenvolvedor júnior apaixonado por transformar ideias em código! Tenho 3 projetos principais e estou sempre aprendendo. O que gostaria de saber?",
+        content: "Desculpe, ocorreu um problema técnico. Mas posso te contar que sou um desenvolvedor júnior apaixonado por transformar ideias em código! Tenho 3 projetos principais e estou sempre aprendendo. O que você gostaria de saber?",
         timestamp: new Date()
       };
 
-      setMessages(prev => [...prev, errorResponse]);
+      setMessages(prev => [...prev, respostaErro]);
       
       toast({
         title: "Erro de conexão",
