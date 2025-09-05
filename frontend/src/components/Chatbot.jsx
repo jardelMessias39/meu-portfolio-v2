@@ -2,20 +2,25 @@ import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, Send, X, Bot, User } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { chatbotResponses } from '../data/mock';
+import { useToast } from '../hooks/use-toast';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const Chatbot = ({ isOpen, onToggle }) => {
   const [messages, setMessages] = useState([
     {
       id: 1,
       type: 'bot',
-      content: chatbotResponses.greeting,
+      content: "Olá! Sou o assistente virtual do portfólio. Posso te contar sobre a experiência, projetos e objetivos como desenvolvedor. O que gostaria de saber?",
       timestamp: new Date()
     }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [sessionId, setSessionId] = useState(null);
   const messagesEndRef = useRef(null);
+  const { toast } = useToast();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -25,29 +30,29 @@ const Chatbot = ({ isOpen, onToggle }) => {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const getBotResponse = (userMessage) => {
-    const message = userMessage.toLowerCase();
-    
-    if (message.includes('experiência') || message.includes('experiencia') || message.includes('trabalho')) {
-      return chatbotResponses.experience;
+  const sendMessageToAPI = async (message, currentSessionId) => {
+    try {
+      const response = await fetch(`${API}/chat`, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          message: message,
+          session_id: currentSessionId 
+        })
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error sending message to API:', error);
+      throw error;
     }
-    if (message.includes('projeto') || message.includes('jogo') || message.includes('site') || message.includes('turismo')) {
-      return chatbotResponses.projects;
-    }
-    if (message.includes('motivação') || message.includes('motivacao') || message.includes('porque') || message.includes('por que')) {
-      return chatbotResponses.motivation;
-    }
-    if (message.includes('objetivo') || message.includes('meta') || message.includes('futuro') || message.includes('carreira')) {
-      return chatbotResponses.goals;
-    }
-    if (message.includes('habilidade') || message.includes('tecnologia') || message.includes('skill') || message.includes('linguagem')) {
-      return chatbotResponses.skills;
-    }
-    if (message.includes('olá') || message.includes('ola') || message.includes('oi') || message.includes('hello')) {
-      return chatbotResponses.greeting;
-    }
-    
-    return chatbotResponses.default;
   };
 
   const handleSendMessage = async () => {
@@ -61,25 +66,53 @@ const Chatbot = ({ isOpen, onToggle }) => {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const currentMessage = inputValue;
     setInputValue('');
     setIsTyping(true);
 
-    // Simulate bot thinking time
-    setTimeout(() => {
+    try {
+      const response = await sendMessageToAPI(currentMessage, sessionId);
+      
+      // Atualizar session_id se necessário
+      if (response.session_id && response.session_id !== sessionId) {
+        setSessionId(response.session_id);
+      }
+
       const botResponse = {
         id: Date.now() + 1,
         type: 'bot',
-        content: getBotResponse(inputValue),
+        content: response.response,
         timestamp: new Date()
       };
 
       setMessages(prev => [...prev, botResponse]);
+      
+    } catch (error) {
+      console.error('Error:', error);
+      
+      // Fallback response em caso de erro
+      const errorResponse = {
+        id: Date.now() + 1,
+        type: 'bot',
+        content: "Desculpe, ocorreu um problema técnico. Mas posso te contar que sou um desenvolvedor júnior apaixonado por transformar ideias em código! Tenho 3 projetos principais e estou sempre aprendendo. O que gostaria de saber?",
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, errorResponse]);
+      
+      toast({
+        title: "Erro de conexão",
+        description: "Houve um problema ao conectar com o servidor. Tente novamente.",
+        variant: "destructive"
+      });
+    } finally {
       setIsTyping(false);
-    }, 1000 + Math.random() * 1000);
+    }
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
       handleSendMessage();
     }
   };
@@ -117,7 +150,9 @@ const Chatbot = ({ isOpen, onToggle }) => {
           </div>
           <div>
             <h3 className="font-semibold">Assistente Virtual</h3>
-            <p className="text-xs text-blue-100">Pergunte sobre minha experiência</p>
+            <p className="text-xs text-blue-100">
+              {sessionId ? `Sessão ativa` : 'Pergunte sobre minha experiência'}
+            </p>
           </div>
         </div>
         <Button
@@ -152,7 +187,7 @@ const Chatbot = ({ isOpen, onToggle }) => {
                   ? 'bg-blue-600 text-white' 
                   : 'bg-gray-100 text-gray-900'
               }`}>
-                <p className="text-sm leading-relaxed">{message.content}</p>
+                <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
               </div>
             </div>
           </div>
@@ -186,6 +221,7 @@ const Chatbot = ({ isOpen, onToggle }) => {
                 key={index}
                 onClick={() => handleSuggestionClick(suggestion)}
                 className="text-xs bg-blue-50 text-blue-600 px-3 py-1 rounded-full hover:bg-blue-100 transition-colors"
+                disabled={isTyping}
               >
                 {suggestion}
               </button>
