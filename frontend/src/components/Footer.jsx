@@ -76,10 +76,19 @@ const Footer = () => {
               <div>
                 <p className="font-medium text-white mb-1">Email</p>
                 <a 
-                  href="mailto:contato@desenvolvedor.com"
+                  href="mailto:jardel.messias.dev@gmail.com"
                   className="hover:text-white transition-colors"
                 >
-                  contato@desenvolvedor.com
+                  jardel.messias.dev@gmail.com
+                </a>
+              </div>
+              <div>
+                <p className="font-medium text-white mb-1">Telefone</p>
+                <a 
+                  href="https://wa.me/5579998061093"
+                  className="hover:text-white transition-colors"
+                >
+                  (79) 99806-1093
                 </a>
               </div>
               <div>
