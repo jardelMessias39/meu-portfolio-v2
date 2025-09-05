@@ -102,7 +102,7 @@ const Chatbot = ({ isOpen, onToggle }) => {
       
       toast({
         title: "Erro de conexão",
-        description: "Houve um problema ao conectar com o servidor. Tente novamente.",
+        description: "Houve um problema ao conectar com o servidor. Tente novamente em alguns segundos.",
         variant: "destructive"
       });
     } finally {
