@@ -147,14 +147,14 @@ INSTRUÇÕES DE RESPOSTA:
             return ai_response, session.session_id
             
         except Exception as e:
-            logger.error(f"Error processing message: {str(e)}")
-            # Fallback para erro
-            fallback_response = (
+            logger.error(f"Erro ao processar mensagem: {str(e)}")
+            # Resposta de fallback em caso de erro
+            resposta_fallback = (
                 "Desculpe, ocorreu um problema técnico. Mas posso te contar que sou um "
                 "desenvolvedor júnior apaixonado por transformar ideias em código! "
-                "Tenho 3 projetos principais e estou sempre aprendendo. O que gostaria de saber?"
+                "Tenho 3 projetos principais e estou sempre aprendendo. O que você gostaria de saber?"
             )
-            return fallback_response, session_id or "error-session"
+            return resposta_fallback, session_id or "error-session"
 
     async def get_session_history(self, session_id: str) -> ChatSession:
         """Retorna o histórico de uma sessão"""
