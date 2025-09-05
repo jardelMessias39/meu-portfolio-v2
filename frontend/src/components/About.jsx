@@ -78,11 +78,24 @@ const About = () => {
         {/* Mission */}
         <div className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white text-center">
           <h3 className="text-2xl font-bold mb-4">Minha Missão</h3>
-          <p className="text-lg leading-relaxed max-w-3xl mx-auto">
-            Quero participar de equipes que desenvolvem projetos que melhoram a vida das pessoas, 
-            trazendo mais produtividade e fazendo a diferença no mundo. Cada linha de código 
-            deve ter um propósito e gerar impacto positivo.
+          <p className="text-lg leading-relaxed max-w-3xl mx-auto mb-4">
+            Quero fazer parte de equipes que desenvolvem projetos que melhorem a vida das pessoas. 
+            Meu objetivo é dar condições melhores à minha família e ter tempo para passear com eles, 
+            enquanto uso a tecnologia para resolver problemas reais.
           </p>
+          <p className="text-blue-100 italic">
+            "Nunca é tarde para seguir seus sonhos. Cada linha de código é um passo em direção a um futuro melhor."
+          </p>
+          
+          {/* Download CV Button */}
+          <div className="mt-6">
+            <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors inline-flex items-center gap-2">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Baixar Currículo (PDF)
+            </button>
+          </div>
         </div>
       </div>
     </section>
