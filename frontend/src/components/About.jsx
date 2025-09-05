@@ -20,18 +20,25 @@ const About = () => {
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold text-gray-900">Minha História</h3>
               <p className="text-gray-600 leading-relaxed">
-                Formado em Licenciatura em Informática pela UNIT em 2019, descobri minha verdadeira 
-                paixão pela programação em junho de 2025, quando ingressei na DevClub. 
+                Olá! Sou <strong>Jardel Messias</strong>, tenho 39 anos e sou um desenvolvedor Full Stack com uma 
+                jornada única. Nascido em Salvador-BA, vim para Sergipe aos 13 anos para morar com minha 
+                avó materna, onde aprendi importantes lições sobre respeito e perseverança.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                O que me fascina na programação é ver códigos se transformarem em algo visual e 
-                funcional. A capacidade de transformar uma ideia em realidade através do código 
-                é o que me motiva todos os dias.
+                Formei-me em Licenciatura em Informática pela UNIT há 8 anos, mas foi só agora, em junho 
+                de 2025 com a DevClub, que descobri minha verdadeira paixão pela programação. Antes trabalhei 
+                como cortador na Dakota Calçados e fiz diversos cursos, desde instalador elétrico até 
+                atendimento ao cliente.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                Sou uma pessoa tranquila que sempre corre atrás dos objetivos. Acredito que 
-                ninguém nasce sabendo, então estou sempre em busca de conhecimento para me 
-                tornar um programador cada vez melhor.
+                O que realmente me encanta é a capacidade de materializar ideias em código e resolver 
+                problemas que façam a diferença na vida das pessoas. Sou uma pessoa conservadora, que 
+                valoriza a família acima de tudo. Minha maior motivação é dar condições melhores à minha 
+                família e ter tempo para passear com eles.
+              </p>
+              <p className="text-gray-600 leading-relaxed">
+                Agradeço a Deus pela força e garra ao longo desta trajetória. Acredito que nunca é tarde 
+                para seguir seus sonhos, e estou pronto para colocar minhas ideias em prática como desenvolvedor.
               </p>
             </div>
           </div>
