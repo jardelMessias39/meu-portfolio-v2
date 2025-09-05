@@ -43,49 +43,48 @@ async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
-# New chat routes
 @api_router.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
     """Endpoint principal para o chatbot"""
     try:
-        response, session_id = await chat_service.process_message(
+        resposta, session_id = await chat_service.process_message(
             message=request.message,
             session_id=request.session_id
         )
         
         return ChatResponse(
-            response=response,
+            response=resposta,
             session_id=session_id
         )
     
     except Exception as e:
-        logging.error(f"Chat endpoint error: {str(e)}")
+        logging.error(f"Erro no endpoint do chat: {str(e)}")
         raise HTTPException(status_code=500, detail="Erro interno do servidor")
 
 @api_router.get("/chat/sessions/{session_id}")
 async def get_chat_session(session_id: str):
     """Retorna o histórico de uma sessão de chat"""
     try:
-        session = await chat_service.get_session_history(session_id)
-        if not session:
+        sessao = await chat_service.get_session_history(session_id)
+        if not sessao:
             raise HTTPException(status_code=404, detail="Sessão não encontrada")
         
         return {
-            "session_id": session.session_id,
+            "session_id": sessao.session_id,
             "messages": [
                 {
                     "role": msg.role,
                     "content": msg.content,
                     "timestamp": msg.timestamp.isoformat()
                 }
-                for msg in session.messages
+                for msg in sessao.messages
             ]
         }
     
     except HTTPException:
         raise
     except Exception as e:
-        logging.error(f"Get session error: {str(e)}")
+        logging.error(f"Erro ao buscar sessão: {str(e)}")
         raise HTTPException(status_code=500, detail="Erro interno do servidor")
 
 # Include the router in the main app
