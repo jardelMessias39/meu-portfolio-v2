@@ -27,14 +27,14 @@ export const projects = [
     category: "Game Development",
     description: "Quebra-cabeça interativo onde o usuário escolhe uma imagem e define em quantas partes quer dividi-la para depois remontar. Inclui diferentes imagens temáticas do Brasil.",
     features: [
-      "Múltiplas opções de divisão (4x2, 3x3, etc.)",
+      "Múltiplas opções de divisão (4x2, 4x3, etc.)",
       "Imagens temáticas brasileiras", 
-      "Interface intuitiva de drag-and-drop",
-      "Sistema de pontuação e tempo"
+      "Interface intuitiva com modo difícil",
+      "Sistema visual de peças embaralhadas"
     ],
     objective: "Desenvolver concentração, percepção visual e coordenação motora",
     technologies: ["HTML", "CSS", "JavaScript"],
-    image: "https://customer-assets.emergentagent.com/job_prompt-portfolio-bot/artifacts/q4dc5ygc_Captura%20de%20tela%202025-09-05%20121222.png",
+    image: "https://customer-assets.emergentagent.com/job_prompt-portfolio-bot/artifacts/78a9s9os_shuffle.png",
     demo: "#",
     github: "https://github.com/jardelMessias39"
   },
@@ -44,15 +44,14 @@ export const projects = [
     category: "Game Development", 
     description: "Jogo de digitação espacial onde palavras caem do céu como uma chuva cósmica. O jogador deve digitá-las rapidamente antes que atinjam o solo.",
     features: [
+      "Tela inicial com entrada de nome do jogador",
       "Visual espacial com efeito de estrelas",
-      "Sistema de pontuação dinâmico",
-      "Aumento progressivo de velocidade",
-      "Interface moderna e imersiva",
-      "Contador de tempo e recordes"
+      "Interface limpa e moderna",
+      "Sistema de confirmação de jogador"
     ],
     objective: "Desenvolver velocidade de digitação, reflexos e coordenação motora",
     technologies: ["HTML", "CSS", "JavaScript"],
-    image: "https://customer-assets.emergentagent.com/job_prompt-portfolio-bot/artifacts/51kl3uus_Captura%20de%20tela%202025-08-19%20034940.png",
+    image: "https://customer-assets.emergentagent.com/job_prompt-portfolio-bot/artifacts/mpixj6x1_teladousuario.png",
     demo: "#",
     github: "https://github.com/jardelMessias39"
   },
