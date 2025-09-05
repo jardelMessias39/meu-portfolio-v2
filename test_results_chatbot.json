@@ -1,0 +1,59 @@
+[
+  {
+    "test": "Health check do backend",
+    "success": true,
+    "details": "Status: 200, Resposta: {'message': 'Hello World'}",
+    "timestamp": "2025-09-05T14:10:47.227318",
+    "response_data": {
+      "message": "Hello World"
+    }
+  },
+  {
+    "test": "Teste básico do endpoint de chat",
+    "success": true,
+    "details": "✓ Retorna resposta | ✓ Cria session_id | ✓ Resposta em português | ✓ Resposta contextual sobre desenvolvedor",
+    "timestamp": "2025-09-05T14:10:52.383783",
+    "response_data": {
+      "response": "Olá! Meu nome é Desenvolvedor Full Stack, e sou apaixonado por transformar ideias em soluções visuais e funcionais através da programação. Comecei minha jornada de desenvolvimento em 1 de junho de 2025, e desde então venho trabalhando na DevClub, onde tive a oportunidade de aplicar e aprimorar minhas habilidades em tecnologias como HTML, CSS e JavaScript.\n\nDurante essa jornada, desenvolvi projetos que são muito especiais para mim. Um deles é o \"Jogo Embaralhado\", um quebra-cabeça interativo que ajuda a desenvolver a concentração e a percepção aos detalhes. Outro projeto é a \"Chuva de Palavras\", um jogo de digitação que aprimora a agilidade e a coordenação motora. Tenho também um grande carinho pelo \"Site de Turismo Acessível\", que visa democratizar o turismo para pessoas com e sem necessidades especiais, através de um foco total em acessibilidade.\n\nSou tranquilo, mas determinado. A filosofia \"Ninguém nasce sabendo\" me guia na busca contínua por aprendizado e conhecimento. Almejo ser um bom programador e fazer parte de equipes que realmente fazem a diferença no mundo, criando soluções que melhoram a vida das pessoas.\n\nSe quiser saber mais detalhes sobre algum projeto ou discutir ideias, estou aqui!",
+      "session_id": "ae177042-eddd-4adf-8fa9-52a10ad6d8ae"
+    }
+  },
+  {
+    "test": "Teste de conversa continuada",
+    "success": false,
+    "details": "✓ Mantém contexto da sessão | ✗ Resposta não é específica sobre jogo Embaralhado",
+    "timestamp": "2025-09-05T14:10:52.516523",
+    "response_data": {
+      "response": "Desculpe, ocorreu um problema técnico. Mas posso te contar que sou um desenvolvedor júnior apaixonado por transformar ideias em código! Tenho 3 projetos principais e estou sempre aprendendo. O que você gostaria de saber?",
+      "session_id": "ae177042-eddd-4adf-8fa9-52a10ad6d8ae"
+    }
+  },
+  {
+    "test": "Teste de persistência de sessão",
+    "success": false,
+    "details": "✓ Session ID correto | ✗ Histórico incompleto (2 mensagens) | ✓ Estrutura das mensagens válida",
+    "timestamp": "2025-09-05T14:10:52.542368",
+    "response_data": {
+      "session_id": "ae177042-eddd-4adf-8fa9-52a10ad6d8ae",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Olá, me conte sobre sua experiência",
+          "timestamp": "2025-09-05T14:10:49.305000"
+        },
+        {
+          "role": "assistant",
+          "content": "Olá! Meu nome é Desenvolvedor Full Stack, e sou apaixonado por transformar ideias em soluções visuais e funcionais através da programação. Comecei minha jornada de desenvolvimento em 1 de junho de 2025, e desde então venho trabalhando na DevClub, onde tive a oportunidade de aplicar e aprimorar minhas habilidades em tecnologias como HTML, CSS e JavaScript.\n\nDurante essa jornada, desenvolvi projetos que são muito especiais para mim. Um deles é o \"Jogo Embaralhado\", um quebra-cabeça interativo que ajuda a desenvolver a concentração e a percepção aos detalhes. Outro projeto é a \"Chuva de Palavras\", um jogo de digitação que aprimora a agilidade e a coordenação motora. Tenho também um grande carinho pelo \"Site de Turismo Acessível\", que visa democratizar o turismo para pessoas com e sem necessidades especiais, através de um foco total em acessibilidade.\n\nSou tranquilo, mas determinado. A filosofia \"Ninguém nasce sabendo\" me guia na busca contínua por aprendizado e conhecimento. Almejo ser um bom programador e fazer parte de equipes que realmente fazem a diferença no mundo, criando soluções que melhoram a vida das pessoas.\n\nSe quiser saber mais detalhes sobre algum projeto ou discutir ideias, estou aqui!",
+          "timestamp": "2025-09-05T14:10:52.377000"
+        }
+      ]
+    }
+  },
+  {
+    "test": "Teste de diferentes perguntas",
+    "success": false,
+    "details": "Pergunta 1 (motivação): ✓ | Pergunta 2 (objetivos): ✗ | Pergunta 3 (turismo): ✓",
+    "timestamp": "2025-09-05T14:10:55.704671",
+    "response_data": null
+  }
+]
