@@ -6,7 +6,7 @@ export const profileData = {
   bio: "Transformando ideias em código desde junho de 2025. Apaixonado por criar soluções que fazem a diferença na vida das pessoas.",
   company: "DevClub",
   startDate: "1 de junho de 2025",
-  education: "Licenciatura em Informática - UNIT (2019)",
+  education: "Licenciatura em Informática - UNIT (Janeiro 2013 - Novembro 2019)",
   location: "Brasil",
   phone: "(79) 99806-1093",
   email: "jardel.messias.dev@gmail.com",
