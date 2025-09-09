@@ -1,4 +1,5 @@
 import React from 'react';
+import Hero from './components/Hero';
 import './App.css';
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
         </div>
       </header>
 
-      {/* Hero */}
+      <Hero />
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl font-bold text-gray-900 mb-6">
