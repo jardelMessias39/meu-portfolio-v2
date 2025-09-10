@@ -130,7 +130,7 @@ export const chatbotResponses = {
   
   experience: "Comecei na programação em 1 de junho de 2025 na empresa DevClub. Sou formado em Licenciatura em Informática pela UNIT desde 2019. Atualmente estou focado em aprender HTML, CSS e JavaScript, com planos de estudar React e Node.js em breve.",
   
-  projects: "Já desenvolvi 3 projetos principais: o Jogo Embaralhado (quebra-cabeça interativo), Chuva de Palavras (jogo de digitação) e um Site de Turismo com foco em acessibilidade. Cada projeto foi pensado para gerar impacto positivo na vida das pessoas.",
+  projects: "Já desenvolvi 4 projetos principais: o Jogo Embaralhado (quebra-cabeça interativo), Chuva de Palavras (jogo de digitação) , um Site de Turismo com foco em acessibilidade e Gerador de Link para WhatsApp(facilitando o contato comercial). Cada projeto foi pensado para gerar impacto positivo na vida das pessoas.",
   
   motivation: "O que me fascina na programação é ver códigos se transformarem em algo visual e funcional. A capacidade de transformar uma ideia em realidade através do código é o que me motiva todos os dias. Quero fazer parte de equipes que desenvolvem projetos que melhoram a vida das pessoas.",
   
@@ -144,7 +144,7 @@ export const chatbotResponses = {
 export const testimonials = [
   {
     name: "Equipe DevClub",
-    role: "Colegas de Trabalho",
+    role: "Cursando na Empresa DevClub",
     content: "Um desenvolvedor dedicado e sempre disposto a aprender. Seus projetos mostram criatividade e preocupação com acessibilidade.",
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face"
   },
