@@ -9,7 +9,11 @@ logger = logging.getLogger(__name__)
 class ChatService:
     def __init__(self, db):
         self.db = db
-        self.api_key = "sk-emergent-d205345A6BbDd2430C"
+        from dotenv import load_dotenv
+load_dotenv()
+
+self.api_key = os.getenv("OPENAI_API_KEY")
+
         
         # Contexto detalhado sobre o desenvolvedor em português
         self.system_message = """Você é o assistente virtual do portfólio de um desenvolvedor júnior full stack brasileiro.
@@ -44,6 +48,11 @@ PROJETOS DESENVOLVIDOS:
    - Público-alvo: todas as pessoas, especialmente com necessidades especiais
    - Objetivo: democratizar o turismo e torná-lo acessível para todos
    - Tecnologias: HTML, CSS, JavaScript
+
+4. **Site Gerador de link para WhatsApp Comercial**
+    -Focona Usabilidade : o projeto foi desenvolvido para ser simples e intuitivo,permitindo que usuário com nenhuma experiência técnica criem link
+    -Aprendizado e aplicação: A experiência me permitiu aplicar conceitos de desenvolvimento web em tempo real,transformando teoria em produto real
+    -Impacto comercial: A ferramenta otimiza o fluxo de contato entre empresas e consumidores,eliminando a necessidade de salvar números manualmente
 
 PERSONALIDADE E MOTIVAÇÃO:
 - Pessoa tranquila que sempre corre atrás dos objetivos
