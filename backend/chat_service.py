@@ -4,6 +4,21 @@ from datetime import datetime
 import logging
 import openai
 from dotenv import load_dotenv
+load_dotenv()
+
+from fastapi import FastAPI
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    print("🔄 App iniciando...")
+    # Aqui você pode conectar ao MongoDB, por exemplo
+    yield
+    print("🛑 App encerrando...")
+    # Aqui você pode fechar conexões, limpar cache, etc.
+
+app = FastAPI(lifespan=lifespan)
+
 
 logger = logging.getLogger(__name__)
 
