@@ -1,22 +1,21 @@
 import os
-from emergentintegrations.llm.chat import LlmChat, UserMessage
 from models import ChatSession, ChatMessage
 from datetime import datetime
 import logging
+import openai
+from dotenv import load_dotenv
 
-    logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
-    class ChatService:
-        def __init__(self, db):
-            self.db = db
-            from dotenv import load_dotenv
-    load_dotenv()
+class ChatService:
+    def __init__(self, db):
+        self.db = db
+        load_dotenv()
+        self.api_key = os.getenv("OPENAI_API_KEY")
+        openai.api_key = self.api_key
 
-    self.api_key = os.getenv("OPENAI_API_KEY")
-
-            
-            # Contexto detalhado sobre o desenvolvedor em português
-            self.system_message = """Você é o assistente virtual do portfólio de um desenvolvedor júnior full stack brasileiro.
+        # Contexto detalhado sobre o desenvolvedor em português
+        self.system_message = """Você é o assistente virtual do portfólio de um desenvolvedor júnior full stack brasileiro.
 
 INFORMAÇÕES DO DESENVOLVEDOR:
 - Nome: Desenvolvedor Full Stack
@@ -50,9 +49,9 @@ PROJETOS DESENVOLVIDOS:
    - Tecnologias: HTML, CSS, JavaScript
 
 4. **Site Gerador de link para WhatsApp Comercial**
-    -Focona Usabilidade : o projeto foi desenvolvido para ser simples e intuitivo,permitindo que usuário com nenhuma experiência técnica criem link
-    -Aprendizado e aplicação: A experiência me permitiu aplicar conceitos de desenvolvimento web em tempo real,transformando teoria em produto real
-    -Impacto comercial: A ferramenta otimiza o fluxo de contato entre empresas e consumidores,eliminando a necessidade de salvar números manualmente
+    - Foco na Usabilidade: o projeto foi desenvolvido para ser simples e intuitivo, permitindo que usuário com nenhuma experiência técnica criem link
+    - Aprendizado e aplicação: A experiência me permitiu aplicar conceitos de desenvolvimento web em tempo real, transformando teoria em produto real
+    - Impacto comercial: A ferramenta otimiza o fluxo de contato entre empresas e consumidores, eliminando a necessidade de salvar números manualmente
 
 PERSONALIDADE E MOTIVAÇÃO:
 - Pessoa tranquila que sempre corre atrás dos objetivos
@@ -86,24 +85,21 @@ INSTRUÇÕES DE RESPOSTA:
 - Use linguagem simples e clara
 - Evite termos técnicos em inglês sem explicação"""
 
-    async def create_chat_instance(self, session_id: str) -> LlmChat:
-        """Cria uma nova instância de chat para cada sessão"""
-        chat = LlmChat(
-            api_key=self.api_key,
-            session_id=session_id,
-            system_message=self.system_message
+    def send_message_to_openai(self, message: str) -> str:
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": self.system_message},
+                {"role": "user", "content": message}
+            ]
         )
-        # Usar GPT-4o conforme solicitado
-        chat.with_model("openai", "gpt-4o")
-        return chat
+        return response.choices[0].message["content"]
 
     async def get_or_create_session(self, session_id: str = None) -> ChatSession:
         """Busca uma sessão existente ou cria uma nova"""
         if session_id:
-            # Tentar buscar sessão existente
             session_data = await self.db.chat_sessions.find_one({"session_id": session_id})
             if session_data:
-                # Converter dados do MongoDB para o modelo
                 messages = [
                     ChatMessage(**msg) for msg in session_data.get("messages", [])
                 ]
@@ -113,8 +109,6 @@ INSTRUÇÕES DE RESPOSTA:
                     updated_at=session_data["updated_at"],
                     messages=messages
                 )
-        
-        # Criar nova sessão
         new_session = ChatSession()
         await self.db.chat_sessions.insert_one(new_session.dict())
         return new_session
@@ -128,42 +122,35 @@ INSTRUÇÕES DE RESPOSTA:
             upsert=True
         )
 
-    async def process_message(self, message: str, session_id: str = None) -> tuple[str, str]:
-        """Processa uma mensagem e retorna a resposta da IA"""
+    async def process_message(self, session_id: str, message: str) -> str:
         try:
-            # Obter ou criar sessão
-            session = await self.get_or_create_session(session_id)
-            
-            # Adicionar mensagem do usuário
-            user_message = ChatMessage(role="user", content=message)
-            session.messages.append(user_message)
-            
-            # Criar instância do chat
-            chat = await self.create_chat_instance(session.session_id)
-            
-            # Enviar mensagem para a IA
-            user_msg = UserMessage(text=message)
-            ai_response = await chat.send_message(user_msg)
-            
-            # Adicionar resposta da IA
-            ai_message = ChatMessage(role="assistant", content=ai_response)
-            session.messages.append(ai_message)
-            
-            # Salvar sessão
-            await self.save_session(session)
-            
-            logger.info(f"Processed message for session {session.session_id}")
-            return ai_response, session.session_id
-            
+            response = openai.ChatCompletion.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": self.system_message},
+                    {"role": "user", "content": message}
+                ]
+            )
+            ai_response = response.choices[0].message["content"]
+
+            # Salva no MongoDB
+            self.db["chat_messages"].insert_one({
+                "session_id": session_id,
+                "user_message": message,
+                "ai_response": ai_response,
+                "timestamp": datetime.utcnow()
+            })
+
+            return ai_response
+
         except Exception as e:
             logger.error(f"Erro ao processar mensagem: {str(e)}")
-            # Resposta de fallback em caso de erro
             resposta_fallback = (
                 "Desculpe, ocorreu um problema técnico. Mas posso te contar que sou um "
                 "desenvolvedor júnior apaixonado por transformar ideias em código! "
                 "Tenho 3 projetos principais e estou sempre aprendendo. O que você gostaria de saber?"
             )
-            return resposta_fallback, session_id or "error-session"
+            return resposta_fallback
 
     async def get_session_history(self, session_id: str) -> ChatSession:
         """Retorna o histórico de uma sessão"""
