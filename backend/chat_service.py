@@ -4,19 +4,19 @@ from models import ChatSession, ChatMessage
 from datetime import datetime
 import logging
 
-logger = logging.getLogger(__name__)
+    logger = logging.getLogger(__name__)
 
-class ChatService:
-    def __init__(self, db):
-        self.db = db
-        from dotenv import load_dotenv
-load_dotenv()
+    class ChatService:
+        def __init__(self, db):
+            self.db = db
+            from dotenv import load_dotenv
+    load_dotenv()
 
-self.api_key = os.getenv("OPENAI_API_KEY")
+    self.api_key = os.getenv("OPENAI_API_KEY")
 
-        
-        # Contexto detalhado sobre o desenvolvedor em português
-        self.system_message = """Você é o assistente virtual do portfólio de um desenvolvedor júnior full stack brasileiro.
+            
+            # Contexto detalhado sobre o desenvolvedor em português
+            self.system_message = """Você é o assistente virtual do portfólio de um desenvolvedor júnior full stack brasileiro.
 
 INFORMAÇÕES DO DESENVOLVEDOR:
 - Nome: Desenvolvedor Full Stack
