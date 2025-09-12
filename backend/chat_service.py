@@ -4,20 +4,13 @@ from datetime import datetime
 import logging
 import openai
 from dotenv import load_dotenv
+import openai
+
 load_dotenv()
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
-from fastapi import FastAPI
-from contextlib import asynccontextmanager
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    print("🔄 App iniciando...")
-    # Aqui você pode conectar ao MongoDB, por exemplo
-    yield
-    print("🛑 App encerrando...")
-    # Aqui você pode fechar conexões, limpar cache, etc.
-
-app = FastAPI(lifespan=lifespan)
+# FastAPI app instance and lifespan manager removed from this module.
 
 
 logger = logging.getLogger(__name__)
@@ -27,7 +20,7 @@ class ChatService:
         self.db = db
         load_dotenv()
         self.api_key = os.getenv("OPENAI_API_KEY")
-        openai.api_key = self.api_key
+        self.openai_client = openai.OpenAI(api_key=self.api_key)
 
         # Contexto detalhado sobre o desenvolvedor em português
         self.system_message = """Você é o assistente virtual do portfólio de um desenvolvedor júnior full stack brasileiro.
@@ -64,7 +57,7 @@ PROJETOS DESENVOLVIDOS:
    - Tecnologias: HTML, CSS, JavaScript
 
 4. **Site Gerador de link para WhatsApp Comercial**
-    - Foco na Usabilidade: o projeto foi desenvolvido para ser simples e intuitivo, permitindo que usuário com nenhuma experiência técnica criem link
+     - Foco na Usabilidade: o projeto foi desenvolvido para ser simples e intuitivo, permitindo que usuários sem experiência técnica criem links.
     - Aprendizado e aplicação: A experiência me permitiu aplicar conceitos de desenvolvimento web em tempo real, transformando teoria em produto real
     - Impacto comercial: A ferramenta otimiza o fluxo de contato entre empresas e consumidores, eliminando a necessidade de salvar números manualmente
 
@@ -101,14 +94,15 @@ INSTRUÇÕES DE RESPOSTA:
 - Evite termos técnicos em inglês sem explicação"""
 
     def send_message_to_openai(self, message: str) -> str:
-        response = openai.ChatCompletion.create(
+        response = self.openai_client.chat.completions.create(
             model="gpt-4",
             messages=[
                 {"role": "system", "content": self.system_message},
                 {"role": "user", "content": message}
             ]
         )
-        return response.choices[0].message["content"]
+        return response.choices[0].message.content
+        return response.choices[0].message.content
 
     async def get_or_create_session(self, session_id: str = None) -> ChatSession:
         """Busca uma sessão existente ou cria uma nova"""
@@ -136,17 +130,16 @@ INSTRUÇÕES DE RESPOSTA:
             {"$set": session.dict()},
             upsert=True
         )
-
     async def process_message(self, session_id: str, message: str) -> str:
         try:
-            response = openai.ChatCompletion.create(
+            response = self.openai_client.chat.completions.create(
                 model="gpt-4",
                 messages=[
                     {"role": "system", "content": self.system_message},
                     {"role": "user", "content": message}
                 ]
             )
-            ai_response = response.choices[0].message["content"]
+            ai_response = response.choices[0].message.content
 
             # Salva no MongoDB
             self.db["chat_messages"].insert_one({
@@ -166,6 +159,7 @@ INSTRUÇÕES DE RESPOSTA:
                 "Tenho 3 projetos principais e estou sempre aprendendo. O que você gostaria de saber?"
             )
             return resposta_fallback
+            
 
     async def get_session_history(self, session_id: str) -> ChatSession:
         """Retorna o histórico de uma sessão"""
