@@ -17,6 +17,7 @@ yarn-error.log*
 .env
 venv/
 _pycache_/
+backend/.env
 
 # Outros
 coverage/
