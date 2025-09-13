@@ -112,4 +112,6 @@ async def get_chat_session(session_id: str):
         raise HTTPException(status_code=500, detail="Erro interno do servidor")
 
 # Inclua o router APENAS depois de todas as rotas estarem definidas
-app.include_router(api_router)
+app = FastAPI()
+
+app.include_router(api_router, prefix="/api")

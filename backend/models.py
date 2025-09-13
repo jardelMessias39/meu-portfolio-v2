@@ -1,8 +1,8 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import List
 from datetime import datetime
 import uuid
-from typing import Literal
+from .chat_message import ChatMessage  # ajuste conforme seu projeto
 
 class ChatMessage(BaseModel):
     role: Literal["user", "assistant"]
@@ -18,7 +18,7 @@ class ChatSession(BaseModel):
     session_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
-    messages: List[ChatMessage] = []
+    messages: List[ChatMessage] = Field(default_factory=list)
 
 class ChatRequest(BaseModel):
     message: str
