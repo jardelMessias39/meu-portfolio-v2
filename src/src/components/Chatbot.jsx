@@ -130,14 +130,35 @@ const Chatbot = ({ isOpen, onToggle }) => {
 
   if (!isOpen) {
     return (
-      <Button
-        onClick={onToggle}
-        className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg z-50"
-        size="icon"
-      >
-        <MessageCircle className="h-6 w-6" />
-      </Button>
-    );
+  <div className={styles.chatContainer}>
+    <h2>👨‍💻 Assistente do Desenvolvedor Full Stack</h2>
+    <div className={styles.messages}>
+      {messages.map((msg, i) => (
+        <div key={i} className={`${styles.bubble} ${styles[msg.role]}`}>
+          <div>{msg.content}</div>
+          {msg.timestamp && (
+            <small style={{ fontSize: '0.75rem', color: '#666' }}>
+              {new Date(msg.timestamp).toLocaleTimeString('pt-BR')}
+            </small>
+          )}
+        </div>
+      ))}
+      <div ref={messagesEndRef} />
+    </div>
+
+    <input
+      className={styles.input}
+      value={input}
+      onChange={e => setInput(e.target.value)}
+      onKeyDown={e => e.key === 'Enter' && sendMessage()}
+      placeholder="Digite sua mensagem..."
+    />
+
+    {/* ⬇️ Botão de limpar conversa ⬇️ */}
+    <button onClick={() => setMessages([])}>🧹 Limpar conversa</button>
+  </div>
+);
+
   }
 
   return (
