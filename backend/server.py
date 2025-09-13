@@ -1,9 +1,9 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, Body
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# CORS (libera acesso externo)
+# Libera acesso externo (CORS)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -12,11 +12,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Rotas
-api_router = APIRouter(prefix="/api")
+# Rota para Health Check (adicione essa)
+@app.get("/health")
+async def health_check():
+    return {"status": "ok"}
 
-@api_router.get("/status")
+# Rota para status da API (a que você já tem)
+@app.get("/api/status")
 async def get_status():
     return {"status": "online"}
 
-app.include_router(api_router)
+@app.post("/api/chat")
+async def chat_endpoint(request: dict = Body(...)):
+    message = request.get("message", "")
+    return {"response": f"Você disse: {message}"}
+    
+@app.get("/")
+async def root():
+    return {"message": "Backend está online!"}
