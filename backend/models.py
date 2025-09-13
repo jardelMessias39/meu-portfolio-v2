@@ -2,6 +2,12 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 from datetime import datetime
 import uuid
+from typing import Literal
+
+class ChatMessage(BaseModel):
+    role: Literal["user", "assistant"]
+    content: str
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
 
 class ChatMessage(BaseModel):
     role: str  # "user" or "assistant"
@@ -29,3 +35,10 @@ class StatusCheck(BaseModel):
 
 class StatusCheckCreate(BaseModel):
     client_name: str
+    class ChatMessage(BaseModel):
+        role: str  # "user" or "assistant"
+        content: str
+        timestamp: datetime = Field(default_factory=datetime.utcnow)
+
+    class Config:
+        orm_mode = True
