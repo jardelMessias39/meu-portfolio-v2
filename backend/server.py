@@ -9,8 +9,17 @@ from contextlib import asynccontextmanager
 from models import StatusCheck, StatusCheckCreate, ChatRequest, ChatResponse
 from chat_service import ChatService
 from typing import List
+from fastapi import Body
+from models import ChatSession
 
+@api_router.get("/chat/sessions/{session_id}", response_model=ChatSession)
+async def get_chat_session(session_id: str):
+    ...
 
+@api_router.post("/chat/sessions", response_model=ChatSession)
+async def create_chat_session():
+    session = await chat_service.get_or_create_session()
+    return session
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -69,7 +78,7 @@ async def create_status_check(input: StatusCheckCreate):
     return status_obj
 
 @api_router.post("/chat", response_model=ChatResponse)
-async def chat_endpoint(request: ChatRequest):
+async def chat_endpoint(request: ChatRequest = Body(...)):
     resposta, session_id = await chat_service.process_message(
         message=request.message,
         session_id=request.session_id
