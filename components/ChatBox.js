@@ -11,6 +11,8 @@ export default function ChatBox() {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+  const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
 
   useEffect(() => {
     scrollToBottom();
@@ -18,7 +20,8 @@ export default function ChatBox() {
 
   useEffect(() => {
     if (sessionId) {
-      axios.get(`http://localhost:8000/api/chat/sessions/${sessionId}`)
+      axios.get(`https://meu-portfolio-backend-r1tv.onrender.com/api/chat/sessions/${sessionId}`)
+
         .then(res => {
           setMessages(res.data.messages);
         })
@@ -35,8 +38,8 @@ export default function ChatBox() {
     setMessages(prev => [...prev, userMessage]);
 
     try {
-      const res = await axios.post('http://localhost:8000/api/chat', {
-        message: input,
+      const res = await axios.post('https://meu-portfolio-backend-r1tv.onrender.com/api/chat', {
+
         session_id: sessionId
       });
 

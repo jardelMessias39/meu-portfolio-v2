@@ -1,5 +1,11 @@
-from fastapi import FastAPI, Body
+from fastapi import FastAPI, Body, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+
+from models import ChatSession
+from chat_service import ChatService
+
+from motor.motor_asyncio import AsyncIOMotorClient
+
 
 app = FastAPI()
 
@@ -39,9 +45,17 @@ async def chat_endpoint(request: dict = Body(...)):
 
     return {"response": response, "session_id": session_id}
 
-@app.get("/api/chat/sessions/{session_id}")
+# Supondo que você já tenha o banco configurado
+from motor.motor_asyncio import AsyncIOMotorClient
+db = AsyncIOMotorClient("mongodb://localhost:27017")["chat_db"]
+chat_service = ChatService(db)
+
+@app.get("/api/chat/sessions/{session_id}", response_model=ChatSession)
 async def get_session_messages(session_id: str):
-    return {"messages": sessions.get(session_id, [])}
+    session = await chat_service.get_session_history(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Sessão não encontrada")
+    return session
 
     
 @app.get("/")
