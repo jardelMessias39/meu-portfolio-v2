@@ -7,6 +7,23 @@ import { useToast } from '../hooks/use-toast';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+function formatTimestamp(timestamp) {
+  const date = new Date(timestamp);
+  const now = new Date();
+
+  const isToday = date.toDateString() === now.toDateString();
+  const yesterday = new Date();
+  yesterday.setDate(now.getDate() - 1);
+  const isYesterday = date.toDateString() === yesterday.toDateString();
+
+  const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  if (isToday) return `Hoje às ${time}`;
+  if (isYesterday) return `Ontem às ${time}`;
+  return `${date.toLocaleDateString()} às ${time}`;
+}
+
+
 const Chatbot = ({ isOpen, onToggle }) => {
   const [messages, setMessages] = useState([
     {
@@ -209,6 +226,10 @@ const Chatbot = ({ isOpen, onToggle }) => {
                   : 'bg-gray-100 text-gray-900'
               }`}>
                 <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
+                 <span className="text-xs text-gray-500 block mt-1">
+                  {formatTimestamp(message.timestamp)}
+                 </span>
+
               </div>
             </div>
           </div>

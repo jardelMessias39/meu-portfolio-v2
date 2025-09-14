@@ -2,6 +2,23 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styles from './ChatBox.module.css'; // Certifique-se que esse caminho está correto
 
+function formatTimestamp(timestamp) {
+  const date = new Date(timestamp);
+  const now = new Date();
+
+  const isToday = date.toDateString() === now.toDateString();
+  const yesterday = new Date();
+  yesterday.setDate(now.getDate() - 1);
+  const isYesterday = date.toDateString() === yesterday.toDateString();
+
+  const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  if (isToday) return `Hoje às ${time}`;
+  if (isYesterday) return `Ontem às ${time}`;
+  return `${date.toLocaleDateString()} às ${time}`;
+}
+
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 export default function ChatBox() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -11,25 +28,41 @@ export default function ChatBox() {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-  const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+  
 
 
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
-
   useEffect(() => {
-    if (sessionId) {
-      axios.get(`https://meu-portfolio-backend-r1tv.onrender.com/api/chat/sessions/${sessionId}`)
-
-        .then(res => {
-          setMessages(res.data.messages);
-        })
-        .catch(err => {
-          console.error("Erro ao buscar histórico:", err);
-        });
+  const createSession = async () => {
+    try {
+      const res = await axios.post(`${BASE_URL}/api/chat`, { message: "init" });
+      setSessionId(res.data.session_id);
+    } catch (err) {
+      console.error("Erro ao criar sessão:", err);
     }
-  }, [sessionId]);
+  };
+
+  if (!sessionId) {
+    createSession();
+  }
+}, []);
+
+
+ useEffect(() => {
+  const createSession = async () => {
+    try {
+      const res = await axios.post(`${BASE_URL}/api/chat`, { message: "init" });
+      setSessionId(res.data.session_id);
+    } catch (err) {
+      console.error("Erro ao criar sessão:", err);
+    }
+  };
+
+  createSession(); // chama direto
+}, []);
+
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -38,13 +71,17 @@ export default function ChatBox() {
     setMessages(prev => [...prev, userMessage]);
 
     try {
-      const res = await axios.post('https://meu-portfolio-backend-r1tv.onrender.com/api/chat', {
+      const res = await axios.post(`${BASE_URL}/api/chat`, {
+  message: input,
+  session_id: sessionId
+});
 
-        session_id: sessionId
-      });
 
       const { response, session_id } = res.data;
-      setSessionId(session_id);
+     if (!sessionId) {
+  setSessionId(session_id);
+}
+
       setMessages(prev => [...prev, { role: 'assistant', content: response }]);
       setInput('');
     } catch (err) {
@@ -54,23 +91,17 @@ export default function ChatBox() {
 
   // ⬇️ Aqui entra o JSX que você mandou ⬇️
   return (
-    <div className={styles.chatContainer}>
-      <h2>👨‍💻 Assistente do Desenvolvedor Full Stack</h2>
-      <div className={styles.messages}>
-        {messages.map((msg, i) => (
-          <div key={i} className={`${styles.bubble} ${styles[msg.role]}`}>
-            {msg.content}
-          </div>
-        ))}
-        <div ref={messagesEndRef} />
-      </div>
-      <input
-        className={styles.input}
-        value={input}
-        onChange={e => setInput(e.target.value)}
-        onKeyDown={e => e.key === 'Enter' && sendMessage()}
-        placeholder="Digite sua mensagem..."
-      />
+    <div className={styles.messages}>
+  {messages.map((msg, i) => (
+    <div key={i} className={`${styles.bubble} ${styles[msg.role]}`}>
+      <p>{msg.content}</p>
+      <span className={styles.timestamp}>
+        {new Date(msg.timestamp).toLocaleString()}
+      </span>
     </div>
+  ))}
+  <div ref={messagesEndRef} />
+</div>
+
   );
 }

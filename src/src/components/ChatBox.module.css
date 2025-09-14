@@ -58,3 +58,10 @@ button:hover {
 button:active {
   background-color: #ff9999;
 }
+.timestamp {
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 4px;
+  display: block;
+  text-align: right;
+}
