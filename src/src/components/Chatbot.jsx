@@ -111,7 +111,7 @@ const Chatbot = ({ isOpen, onToggle }) => {
       const respostaErro = {
         id: Date.now() + 1,
         type: 'bot',
-        content: "Desculpe, ocorreu um problema técnico. Mas posso te contar que sou um desenvolvedor júnior apaixonado por transformar ideias em código! Tenho 3 projetos principais e estou sempre aprendendo. O que você gostaria de saber?",
+        content: "Desculpe, ocorreu um problema técnico. Mas posso te contar que sou um desenvolvedor júnior apaixonado por transformar ideias em código! Tenho 4 projetos principais e estou sempre aprendendo. O que você gostaria de saber?",
         timestamp: new Date()
       };
 
