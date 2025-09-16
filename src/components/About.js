@@ -62,7 +62,7 @@ const About = () => {
             <div className="bg-green-50 p-6 rounded-xl border border-green-100">
               <Building2 className="h-8 w-8 text-green-600 mb-4" />
               <h4 className="font-semibold text-gray-900 mb-2">Experiência</h4>
-              <p className="text-gray-600">DevClub + Dakota Calçados</p>
+              <p className="text-gray-600"> Dakota Calçados</p>
               <p className="text-sm text-green-600 mt-1">Cortador + Desenvolvedor</p>
             </div>
 

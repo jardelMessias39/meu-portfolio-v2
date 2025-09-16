@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import styles from './ChatBox.module.css'; // Certifique-se que esse caminho está correto
+import styles from './ChatBox.module.css';
+
 
 function formatTimestamp(timestamp) {
   const date = new Date(timestamp);
