@@ -1,0 +1,12 @@
+/* components/ChatBox.module.css */
+.chatContainer {
+  padding: 1rem;
+  max-width: 600px;
+  margin: auto;
+}
+
+.responseBox {
+  margin-top: 1rem;
+  background: #f0f0f0;
+  padding: 1rem;
+}
