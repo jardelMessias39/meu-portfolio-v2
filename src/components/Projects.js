@@ -132,7 +132,7 @@ const Projects = () => {
             </p>
             <Button size="lg" className="bg-gray-900 hover:bg-gray-800">
               <Github className="h-5 w-5 mr-2" />
-              Ver GitHub
+              Ver GitHub<a href="https://github.com/jardelMessias39?tab=repositories"></a>
             </Button>
           </div>
         </div>
