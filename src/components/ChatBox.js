@@ -51,19 +51,6 @@ export default function ChatBox() {
 }, []);
 
 
- useEffect(() => {
-  const createSession = async () => {
-    try {
-      const res = await axios.post(`${BASE_URL}/api/chat`, { message: "init" });
-      setSessionId(res.data.session_id);
-    } catch (err) {
-      console.error("Erro ao criar sessão:", err);
-    }
-  };
-
-  createSession(); // chama direto
-}, []);
-
 
   const sendMessage = async () => {
     if (!input.trim()) return;

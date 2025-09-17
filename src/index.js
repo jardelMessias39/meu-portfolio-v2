@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import ChatBox from "../src/components/ChatBox";
+import ChatBox from '../components/ChatBox';
+
 
 
 export default function Home() {
